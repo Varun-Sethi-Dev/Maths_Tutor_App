@@ -5,9 +5,7 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
@@ -19,17 +17,28 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.maths_tutor_app.presentation.ui.authenticationScreen.loginScreen.LogInScreen
 import com.example.maths_tutor_app.presentation.ui.authenticationScreen.signupScreen.SignUpScreen
+import com.example.maths_tutor_app.presentation.ui.homeScreen.courseCatalogScreen.CoursesScreen
+import com.example.maths_tutor_app.presentation.ui.homeScreen.courseCatalogScreen.HomeScreen
+import com.example.maths_tutor_app.presentation.ui.homeScreen.courseCatalogScreen.HomeTabType
+import com.example.maths_tutor_app.presentation.ui.homeScreen.courseCatalogScreen.OnGoingCoursesScreen
+import com.example.maths_tutor_app.presentation.ui.homeScreen.userProfleScreen.ProfileScreen
 import com.example.maths_tutor_app.presentation.ui.splashScreen.SplashScreen
 import com.example.maths_tutor_app.presentation.ui.welcomeScreen.WelcomeScreen
 
 enum class AppScreens(val route: String) {
-    SplashScreen(route = "splash_screen"), AppWelcomeScreen(route = "welcome_screen"), LoginScreen(
+    SplashScreen(route = "splash_screen"),
+    AppWelcomeScreen(route = "welcome_screen"),
+    LoginScreen(
         route = "login_screen"
     ),
-    SignupScreen(route = "signup_Screen"), HomeLessonsCatalogScreen(route = "home_lessons_catalog_screen"), HomeMyCourseCatalogScreen(
+    SignupScreen(route = "signup_Screen"),
+    HomeScreen(route = "home_screen"),
+    HomeLessonsCatalogScreen(route = "home_lessons_catalog_screen"),
+    HomeMyCourseCatalogScreen(
         route = "home_myCourse_catalog_screen"
     ),
-    HomeMyProfileScreen(route = "home_myProfile_screen"), QuizScreen(route = "quiz_screen")
+    HomeMyProfileScreen(route = "home_myProfile_screen"),
+    QuizScreen(route = "quiz_screen")
 
 }
 
@@ -50,12 +59,12 @@ fun NavigationManager(modifier: Modifier = Modifier) {
         composable(route = AppScreens.AppWelcomeScreen.route, enterTransition = {
             slideInVertically(
                 initialOffsetY = { it }, // Start from bottom of screen
-                animationSpec = tween(500, 0, LinearEasing)
-            ) + fadeIn(tween(500, 0, LinearEasing), 0f)
+                animationSpec = tween(300, 0, LinearEasing)
+            ) + fadeIn(tween(300, 0, LinearEasing), 0f)
         }, exitTransition = {
             slideOutVertically(
-                targetOffsetY = { it }, animationSpec = tween(500, 0, LinearEasing)
-            ) + fadeOut(tween(500, 0, LinearEasing), 0f)
+                targetOffsetY = { it }, animationSpec = tween(300, 0, LinearEasing)
+            ) + fadeOut(tween(300, 0, LinearEasing), 0f)
 
         }) {
             WelcomeScreen(modifier = Modifier.fillMaxSize()) {
@@ -71,16 +80,16 @@ fun NavigationManager(modifier: Modifier = Modifier) {
         composable(route = AppScreens.LoginScreen.route, enterTransition = {
             slideInVertically(
                 initialOffsetY = { it }, // Start from bottom of screen
-                animationSpec = tween(500, 0, LinearEasing)
-            ) + fadeIn(tween(500, 0, LinearEasing), 0f)
+                animationSpec = tween(300, 0, LinearEasing)
+            ) + fadeIn(tween(300, 0, LinearEasing), 0f)
         }, exitTransition = {
             slideOutVertically(
-                targetOffsetY = { it }, animationSpec = tween(500, 0, LinearEasing)
-            ) + fadeOut(tween(500, 0, LinearEasing), 0f)
+                targetOffsetY = { it }, animationSpec = tween(300, 0, LinearEasing)
+            ) + fadeOut(tween(300, 0, LinearEasing), 0f)
 
         }) {
             LogInScreen(onLoginClicked = {
-                navController.navigate(route = AppScreens.HomeLessonsCatalogScreen.route)
+                navController.navigate(route = AppScreens.HomeScreen.route)
             }, onSignUpClicked = {
                 navController.navigate(route = AppScreens.SignupScreen.route)
             })
@@ -88,12 +97,12 @@ fun NavigationManager(modifier: Modifier = Modifier) {
         composable(route = AppScreens.SignupScreen.route, enterTransition = {
             slideInVertically(
                 initialOffsetY = { it }, // Start from bottom of screen
-                animationSpec = tween(500, 0, LinearEasing)
-            ) + fadeIn(tween(500, 0, LinearEasing), 0f)
+                animationSpec = tween(300, 0, LinearEasing)
+            ) + fadeIn(tween(300, 0, LinearEasing), 0f)
         }, exitTransition = {
             slideOutVertically(
-                targetOffsetY = { it }, animationSpec = tween(500, 0, LinearEasing)
-            ) + fadeOut(tween(500, 0, LinearEasing), 0f)
+                targetOffsetY = { it }, animationSpec = tween(300, 0, LinearEasing)
+            ) + fadeOut(tween(300, 0, LinearEasing), 0f)
 
         }) {
             SignUpScreen(onLoginClick = {
@@ -101,24 +110,23 @@ fun NavigationManager(modifier: Modifier = Modifier) {
             }, onTC_click = {
                 Toast.makeText(context, "T&C", Toast.LENGTH_SHORT).show()
             }) {
-                navController.navigate(route = AppScreens.HomeLessonsCatalogScreen.route)
+                navController.navigate(route = AppScreens.HomeScreen.route)
             }
         }
-        composable(route = AppScreens.HomeLessonsCatalogScreen.route, enterTransition = {
+        composable(route = AppScreens.HomeScreen.route, enterTransition = {
             slideInVertically(
                 initialOffsetY = { it }, // Start from bottom of screen
-                animationSpec = tween(500, 0, LinearEasing)
-            ) + fadeIn(tween(500, 0, LinearEasing), 0f)
+                animationSpec = tween(300, 0, LinearEasing)
+            ) + fadeIn(tween(300, 0, LinearEasing), 0f)
         }, exitTransition = {
             slideOutVertically(
-                targetOffsetY = { it }, animationSpec = tween(500, 0, LinearEasing)
-            ) + fadeOut(tween(500, 0, LinearEasing), 0f)
+                targetOffsetY = { it }, animationSpec = tween(300, 0, LinearEasing)
+            ) + fadeOut(tween(300, 0, LinearEasing), 0f)
 
         }) {
-            Surface(modifier = Modifier.fillMaxSize()) {
-
-            }
+            HomeScreen()
         }
+
     }
 
 }

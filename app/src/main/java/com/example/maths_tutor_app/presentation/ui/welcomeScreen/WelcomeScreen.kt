@@ -28,14 +28,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.maths_tutor_app.R
+import com.example.maths_tutor_app.presentation.theme.Orange
 
 
+@Preview(showBackground = true)
 @Composable
 fun WelcomeScreen(
     modifier: Modifier = Modifier,
@@ -57,7 +61,8 @@ fun WelcomeScreen(
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                painter = painterResource(id = R.drawable.maths_tutos_logo),
+                contentScale = ContentScale.Crop,
                 contentDescription = "Maths Tutor App Logo",
                 modifier = Modifier.fillMaxSize()
             )
@@ -94,7 +99,7 @@ fun WelcomeScreen(
                 .offset(y = (-50).dp)
                 .align(Alignment.End)
                 .wrapContentSize(),
-            containerColor = Color.Black,
+            containerColor = Orange,
             contentColor = Color.White,
             shape = RoundedCornerShape(12.dp)
         ) {

@@ -1,8 +1,5 @@
 package com.example.maths_tutor_app.presentation.ui.authenticationScreen.signupScreen
 
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,18 +13,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -45,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.maths_tutor_app.R
+import com.example.maths_tutor_app.presentation.theme.Orange
 
 @Preview
 @Composable
@@ -72,7 +66,7 @@ fun SignUpScreen(
             Column(
                 Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 28.dp, vertical = 64.dp)
+                    .padding(horizontal = 24.dp, vertical = 64.dp)
             ) {
                 Text(text = "Maths Tutor", style = MaterialTheme.typography.headlineLarge)
                 Spacer(modifier = Modifier.height(32.dp))
@@ -137,7 +131,7 @@ fun SignUpScreen(
                         .fillMaxWidth()
                         .padding(top = 16.dp, bottom = 8.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Black, contentColor = Color.White
+                        containerColor = Orange, contentColor = Color.White
                     )
                 ) {
                     Text(text = "+ Create an Account")
@@ -150,6 +144,7 @@ fun SignUpScreen(
                     Text(text = "By signing up you are agree to our  ", fontSize = 12.sp)
                     Text(text = "Terms and condition",
                         color = Color.Blue,
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
                         textDecoration = TextDecoration.Underline,
                         modifier = Modifier.clickable {

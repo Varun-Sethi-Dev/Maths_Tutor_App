@@ -41,6 +41,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.maths_tutor_app.R
+import com.example.maths_tutor_app.presentation.theme.Orange
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
@@ -83,12 +84,12 @@ fun LogInScreen(onSignUpClicked: () -> Unit = {}, onLoginClicked: () -> Unit = {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.calculator_slpash_logo),
+                    painter = painterResource(id = R.drawable.maths_tutos_logo),
                     contentDescription = "",
                     modifier = Modifier
                         .weight(1f)
                         .align(Alignment.CenterHorizontally),
-                    contentScale = ContentScale.Fit
+                    contentScale = ContentScale.Crop
                 )
                 Spacer(modifier = Modifier.height(36.dp))
                 Box(
@@ -146,7 +147,7 @@ fun LogInScreen(onSignUpClicked: () -> Unit = {}, onLoginClicked: () -> Unit = {
                                 .fillMaxWidth()
                                 .padding(vertical = 4.dp),
                             shape = RoundedCornerShape(12.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
+                            colors = ButtonDefaults.buttonColors(containerColor = Orange)
                         ) {
                             Text("Login")
                         }
