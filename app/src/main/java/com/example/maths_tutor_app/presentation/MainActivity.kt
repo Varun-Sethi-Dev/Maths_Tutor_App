@@ -1,4 +1,4 @@
-package com.example.maths_tutor_app
+package com.example.maths_tutor_app.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.maths_tutor_app.ui.theme.Maths_Tutor_AppTheme
+import com.example.maths_tutor_app.domain.navigation.NavigationManager
+import com.example.maths_tutor_app.presentation.theme.Maths_Tutor_AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,10 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Maths_Tutor_AppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    NavigationManager(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

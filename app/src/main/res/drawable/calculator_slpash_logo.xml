@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="500dp"
+    android:height="500dp"
+    android:autoMirrored="true"
+    android:viewportWidth="500"
+    android:viewportHeight="500">
+
+    <group>
+
+        <clip-path android:pathData="M0,0h500v500h-500z" />
+
+        <path
+            android:fillColor="#585BD4"
+            android:pathData="@string/splash_logo_path" />
+
+    </group>
+
+</vector>

@@ -1,4 +1,4 @@
-package com.example.maths_tutor_app.ui.theme
+package com.example.maths_tutor_app.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

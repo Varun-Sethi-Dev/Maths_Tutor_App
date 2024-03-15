@@ -50,7 +50,10 @@ android {
 }
 
 dependencies {
-
+    val nav_version = "2.7.7"
+// for navigation in screen of jetpack compose app
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.animation) // For animation in compose
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
