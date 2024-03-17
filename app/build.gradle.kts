@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.google.devtools.ksp") version "1.9.23-1.0.19"
 }
 
 android {
@@ -50,7 +51,15 @@ android {
 }
 
 dependencies {
-    val nav_version = "2.7.7"
+    //For Room db
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.room.compiler)
+
+    // To use Kotlin Symbol Processing (KSP)
+    ksp(libs.androidx.room.room.compiler)
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.kotlinx.coroutines.android)//for coroutines
 // for navigation in screen of jetpack compose app
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.animation) // For animation in compose

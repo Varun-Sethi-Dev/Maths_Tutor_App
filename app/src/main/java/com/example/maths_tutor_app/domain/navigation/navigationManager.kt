@@ -8,20 +8,14 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.maths_tutor_app.presentation.ui.authenticationScreen.loginScreen.LogInScreen
-import com.example.maths_tutor_app.presentation.ui.authenticationScreen.signupScreen.SignUpScreen
-import com.example.maths_tutor_app.presentation.ui.homeScreen.courseCatalogScreen.CoursesScreen
+import com.example.maths_tutor_app.presentation.ui.authenticationScreen.authScreen.AuthScreen
 import com.example.maths_tutor_app.presentation.ui.homeScreen.courseCatalogScreen.HomeScreen
-import com.example.maths_tutor_app.presentation.ui.homeScreen.courseCatalogScreen.HomeTabType
-import com.example.maths_tutor_app.presentation.ui.homeScreen.courseCatalogScreen.OnGoingCoursesScreen
-import com.example.maths_tutor_app.presentation.ui.homeScreen.userProfleScreen.ProfileScreen
 import com.example.maths_tutor_app.presentation.ui.splashScreen.SplashScreen
 import com.example.maths_tutor_app.presentation.ui.welcomeScreen.WelcomeScreen
 
@@ -31,7 +25,6 @@ enum class AppScreens(val route: String) {
     LoginScreen(
         route = "login_screen"
     ),
-    SignupScreen(route = "signup_Screen"),
     HomeScreen(route = "home_screen"),
     HomeLessonsCatalogScreen(route = "home_lessons_catalog_screen"),
     HomeMyCourseCatalogScreen(
@@ -88,31 +81,19 @@ fun NavigationManager(modifier: Modifier = Modifier) {
             ) + fadeOut(tween(300, 0, LinearEasing), 0f)
 
         }) {
-            LogInScreen(onLoginClicked = {
-                navController.navigate(route = AppScreens.HomeScreen.route)
-            }, onSignUpClicked = {
-                navController.navigate(route = AppScreens.SignupScreen.route)
-            })
+            AuthScreen(
+                onLoginClicked = {
+                    navController.navigate(route = AppScreens.HomeScreen.route)
+                },
+                onTcClick = {
+                    Toast.makeText(context, "T&C", Toast.LENGTH_SHORT).show()
+                },
+                onCaClicked = {
+                    navController.navigate(route = AppScreens.HomeScreen.route)
+                }
+            )
         }
-        composable(route = AppScreens.SignupScreen.route, enterTransition = {
-            slideInVertically(
-                initialOffsetY = { it }, // Start from bottom of screen
-                animationSpec = tween(300, 0, LinearEasing)
-            ) + fadeIn(tween(300, 0, LinearEasing), 0f)
-        }, exitTransition = {
-            slideOutVertically(
-                targetOffsetY = { it }, animationSpec = tween(300, 0, LinearEasing)
-            ) + fadeOut(tween(300, 0, LinearEasing), 0f)
 
-        }) {
-            SignUpScreen(onLoginClick = {
-                navController.popBackStack()
-            }, onTC_click = {
-                Toast.makeText(context, "T&C", Toast.LENGTH_SHORT).show()
-            }) {
-                navController.navigate(route = AppScreens.HomeScreen.route)
-            }
-        }
         composable(route = AppScreens.HomeScreen.route, enterTransition = {
             slideInVertically(
                 initialOffsetY = { it }, // Start from bottom of screen
