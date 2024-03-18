@@ -1,6 +1,6 @@
 package com.example.maths_tutor_app.presentation.ui.authenticationScreen.authScreen
 
-import androidx.compose.animation.AnimatedVisibility
+import android.widget.Toast
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateDpAsState
@@ -23,9 +23,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.maths_tutor_app.di.AppViewModelProvider
 import com.example.maths_tutor_app.domain.authViewModel.AuthViewModel
 import com.example.maths_tutor_app.presentation.ui.authenticationScreen.loginScreen.LogIn
 import com.example.maths_tutor_app.presentation.ui.authenticationScreen.signupScreen.SignUp
@@ -37,7 +39,7 @@ fun AuthScreen(
     onLoginClicked: () -> Unit = {},
     onTcClick: () -> Unit = {},
     onCaClicked: () -> Unit = {},
-    viewModel: AuthViewModel = viewModel<AuthViewModel>()
+    viewModel: AuthViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     var isComposed by remember { mutableStateOf(false) }
     LaunchedEffect(true) {
@@ -56,6 +58,7 @@ fun AuthScreen(
 
     )
     val uiState by viewModel.uiState.collectAsState()
+    val context = LocalContext.current
     Column(
         Modifier
             .fillMaxSize()
@@ -77,7 +80,14 @@ fun AuthScreen(
                 .padding(horizontal = 20.dp, vertical = verticalPadding.value)
         ) {
             if (!signUpState) {
-                LogIn(onLoginClicked = { onLoginClicked() },
+                LogIn(onLoginClicked = {
+                    if (viewModel.onLoginClickCheckUser()) {
+                        onLoginClicked()
+                        Toast.makeText(context, "Login Success", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(context, "No User Found", Toast.LENGTH_SHORT).show()
+                    }
+                },
                     onSignUpClicked = {
                         viewModel.reset()
                         signUpState = !signUpState
@@ -98,7 +108,22 @@ fun AuthScreen(
                         viewModel.reset()
                         signUpState = !signUpState
                     },
-                    onCaClicked = onCaClicked,
+                    onCaClicked = {
+                        if (viewModel.onCaClickAddUser()) {
+                            onCaClicked()
+                            Toast.makeText(
+                                context,
+                                "Welcome ${uiState.userName}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Creating Account Failed",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    },
                     username = uiState.userName,
                     password = uiState.password,
                     rePassword = uiState.rePassword,
